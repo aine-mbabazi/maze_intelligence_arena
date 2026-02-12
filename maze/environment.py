@@ -19,13 +19,18 @@ class Maze:
             0: (-1, 0),  # up
             1: (1, 0),   # down
             2: (0, -1),  # left
-            3: (0, 1),  
+            3: (0, 1),   # right
         }
 
         dx, dy = moves[action]
         nx, ny = x + dx, y + dy
 
-        if 0 <= nx < self.size and 0 <= ny < self.size:
+        # Check bounds and walls
+        if (
+            0 <= nx < self.size
+            and 0 <= ny < self.size
+            and self.grid[nx, ny] == 0
+        ):
             self.agent_pos = (nx, ny)
 
         reward = -1
