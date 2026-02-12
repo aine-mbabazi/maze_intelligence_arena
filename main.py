@@ -1,12 +1,18 @@
+
+
 from maze.environment import Maze
 from maze.renderer import render
 from agents.random_agent import RandomAgent
+from agents.bfs_agent import BFSAgent
 import time
 
 env = Maze(size=5)
-agent = RandomAgent()
 
-state = env.reset()
+# Toggle agent here
+# agent = RandomAgent()
+agent = BFSAgent(env)
+
+env.reset()
 total_reward = 0
 
 for step in range(50):
