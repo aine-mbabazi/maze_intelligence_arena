@@ -28,11 +28,17 @@ class QLearningAgent:
         return np.argmax(self.q_table[x, y])
 
     def update(self, state, action, reward, next_state):
-        x, y = state
-        nx, ny = next_state
+      x, y = state
+    nx, ny = next_state
 
-        best_next = np.max(self.q_table[nx, ny])
-        td_target = reward + self.gamma * best_next
-        td_error = td_target - self.q_table[x, y, action]
+    # max Q(s', ·)
+    best_next = np.max(self.q_table[nx, ny])
 
-        self.q_table[x, y, action] += self.alpha * td_error
+    # r + γ max Q(s', ·)
+    td_target = reward + self.gamma * best_next
+
+    # [ r + γ max Q(s', ·) − Q(s,a) ]
+    td_error = td_target - self.q_table[x, y, action]
+
+    # Q(s,a) ← Q(s,a) + α [ ... ]
+    self.q_table[x, y, action] += self.alpha * td_error
