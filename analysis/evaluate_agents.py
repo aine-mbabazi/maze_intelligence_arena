@@ -30,10 +30,10 @@ if __name__ == "__main__":
     random_agent = RandomAgent(env)
     bfs_agent = BFSAgent(env)
 
-    q_agent = QLearningAgent(
-        state_size=env.state_size,
-        action_size=4
-    )
+    q_agent = QLearningAgent(env)
+        # state_size=env.state_size,
+        # action_size=4
+ 
     q_agent.load("models/q_table.npy")
     q_agent.epsilon = 0.0  
 

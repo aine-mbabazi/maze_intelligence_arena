@@ -1,16 +1,17 @@
 import numpy as np
 import random
 
-
 class QLearningAgent:
-    def __init__(self, size, alpha=0.1, gamma=0.9, epsilon=0.2):
-        self.size = size
+    def __init__(self, env, alpha=0.1, gamma=0.9, epsilon=0.1):
+        self.env = env
         self.alpha = alpha
         self.gamma = gamma
         self.epsilon = epsilon
 
-        # Q-table: (x, y, action)
-        self.q_table = np.zeros((size, size, 4))
+        self.q_table = np.zeros(
+            (env.state_size, env.action_size)
+        )
+
 
     def act(self, state):
         x, y = state
@@ -37,3 +38,9 @@ class QLearningAgent:
 
         # Q(s,a) ← Q(s,a) + α [ ... ]
         self.q_table[x, y, action] += self.alpha * td_error
+
+    def save(self, path):
+        np.save(path, self.q_table)
+
+    def load(self, path):
+         self.q_table = np.load(path)
