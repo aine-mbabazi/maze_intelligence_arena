@@ -48,3 +48,6 @@ for step in range(50):
         break
 
 print("Total reward:", total_reward)
+
+agent.save("models/q_table.npy")
+

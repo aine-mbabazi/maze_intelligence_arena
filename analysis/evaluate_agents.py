@@ -1,12 +1,12 @@
 import numpy as np
-from environment import MazeEnv
+from maze.environment import Maze
 from agents.random_agent import RandomAgent
 from agents.bfs_agent import BFSAgent
 from agents.q_learning_agent import QLearningAgent
 
 
 def evaluate(agent, episodes=50):
-    env = MazeEnv()
+    env = Maze()
     rewards = []
 
     for _ in range(episodes):
@@ -25,7 +25,7 @@ def evaluate(agent, episodes=50):
 
 
 if __name__ == "__main__":
-    env = MazeEnv()
+    env = Maze()
 
     random_agent = RandomAgent(env)
     bfs_agent = BFSAgent(env)

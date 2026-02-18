@@ -1,5 +1,9 @@
 import random
 
+
 class RandomAgent:
-    def act(self):
-        return random.randint(0, 3)
+    def __init__(self, env):
+        self.env = env
+
+    def act(self, state):
+        return random.choice(self.env.actions)

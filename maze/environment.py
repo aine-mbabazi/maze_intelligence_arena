@@ -3,6 +3,13 @@ import numpy as np
 class Maze:
     def __init__(self, size=5):
         self.size = size
+
+ 
+        self.state_size = size * size
+        self.action_size = 4
+        self.actions = [0, 1, 2, 3]
+    
+
         self.reset()
 
     def reset(self):
@@ -25,7 +32,6 @@ class Maze:
         dx, dy = moves[action]
         nx, ny = x + dx, y + dy
 
-        # Check bounds and walls
         if (
             0 <= nx < self.size
             and 0 <= ny < self.size
