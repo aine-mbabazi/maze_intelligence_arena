@@ -1,3 +1,4 @@
+import os
 import numpy as np
 from maze.environment import Maze
 from agents.random_agent import RandomAgent
@@ -31,11 +32,19 @@ if __name__ == "__main__":
     bfs_agent = BFSAgent(env)
 
     q_agent = QLearningAgent(env)
-        # state_size=env.state_size,
-        # action_size=4
- 
-    q_agent.load("models/q_table.npy")
-    q_agent.epsilon = 0.0  
+    model_path = "models/q_table.npy"
+
+    if os.path.exists(model_path) and os.path.getsize(model_path) > 0:
+        print("Loading trained Q-table...")
+        q_agent.load(model_path)
+    else:
+        print("Training Q-learning agent...")
+        q_agent.train(episodes=500)
+        q_agent.save(model_path)
+        print("Q-table saved to", model_path)
+
+    # evaluation should be greedy
+    q_agent.epsilon = 0.0
 
     agents = {
         "Random": random_agent,

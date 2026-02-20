@@ -51,7 +51,8 @@ class BFSAgent:
         path.reverse()
         return path
 
-    def act(self):
+    def act(self, state=None):  # Add state parameter with default None
+        """Return the next action in the precomputed path"""
         if self.path:
             return self.path.pop(0)
-        return 0 
+        return 0
